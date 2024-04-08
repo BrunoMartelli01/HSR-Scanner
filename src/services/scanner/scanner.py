@@ -141,7 +141,7 @@ class HSRScanner(QObject):
         relics = []
         if self._config["scan_relics"] and not self._interrupt_event.is_set():
             self._log("Scanning relics...")
-            relics = self.scan_inventory(
+            relics = await self.scan_inventory(
                 RelicStrategy(
                     self._game_data,
                     self.log_signal,
@@ -195,7 +195,7 @@ class HSRScanner(QObject):
         """Stops the scan"""
         self._interrupt_event.set()
 
-    def scan_inventory(
+    async def scan_inventory(
         self, strategy: LightConeStrategy | RelicStrategy
     ) -> set[asyncio.Task]:
         """Scans the inventory for light cones or relics
@@ -351,6 +351,7 @@ class HSRScanner(QObject):
                     self.update_signal.emit(strategy.SCAN_TYPE.value)
 
                     task = asyncio.to_thread(strategy.parse, stats_dict, item_id)
+                    print((await task))
                     tasks.add(task)
 
                 # Next row
