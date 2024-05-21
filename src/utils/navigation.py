@@ -192,3 +192,19 @@ class Navigation:
         while b:
             a, b = b, a % b
         return a
+    def enhance_relic(self):
+        self.move_cursor_to(0.935, 0.9)
+        self.click()
+        time.sleep(0.5)
+        self.move_cursor_to(0.93,0.6)
+        time.sleep(1)
+        self.click()
+        time.sleep(1)
+        self.move_cursor_to(0.935, 0.9)
+        time.sleep(0.2)
+        self.click()
+        time.sleep(2)
+        self._keyboard.tap(keyboard.Key.esc)
+
+        time.sleep(1)
+        self._keyboard.tap(keyboard.Key.esc)
